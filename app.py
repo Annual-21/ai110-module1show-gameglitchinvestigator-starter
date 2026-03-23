@@ -29,40 +29,26 @@ def parse_guess(raw: str):
     return True, value, None
 
 
-def check_guess(guess, secret):
-    if guess == secret:
-        return "Win", "🎉 Correct!"
+# FIXME: Logic breaks here 
+# def update_score(current_score: int, outcome: str, attempt_number: int):
+#     if outcome == "Win":
+#         points = 100 - 10 * (attempt_number + 1)
+#         if points < 10:
+#             points = 10
+#         return current_score + points
 
-    try:
-        if guess > secret:
-            return "Too High", "📈 Go HIGHER!"
-        else:
-            return "Too Low", "📉 Go LOWER!"
-    except TypeError:
-        g = str(guess)
-        if g == secret:
-            return "Win", "🎉 Correct!"
-        if g > secret:
-            return "Too High", "📈 Go HIGHER!"
-        return "Too Low", "📉 Go LOWER!"
+#     if outcome == "Too High":
+#         if attempt_number % 2 == 0:
+#             return current_score + 5
+#         return current_score - 5
 
+#     if outcome == "Too Low":
+#         # removing the unfair penalty for any attempts
+#         if attempt_number % 2 == 0:
+#             return current_score + 5
+#         return current_score - 5
 
-def update_score(current_score: int, outcome: str, attempt_number: int):
-    if outcome == "Win":
-        points = 100 - 10 * (attempt_number + 1)
-        if points < 10:
-            points = 10
-        return current_score + points
-
-    if outcome == "Too High":
-        if attempt_number % 2 == 0:
-            return current_score + 5
-        return current_score - 5
-
-    if outcome == "Too Low":
-        return current_score - 5
-
-    return current_score
+#     return current_score
 
 st.set_page_config(page_title="Glitchy Guesser", page_icon="🎮")
 
